@@ -1,0 +1,31 @@
+# 数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/standard?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: scut@2018
+    driver-class-name: com.mysql.jdbc.Driver
+# Mybatis配置
+mybatis:
+  type-aliases-package: com.scut.longerwu.graduation.models
+  mapper-locations: classpath:mybatis-mapper/*.xml
+# 日志配置
+logging:
+  level:
+      com.scut.longerwu.graduation.dao: debug
+# 文件存放目录
+directory:
+  qiye: /home/ug2017/files/qiye/
+  country: /home/ug2017/files/country/
+  qiyeTxt: /home/ug2017/files/qiyeTxt/
+# 同义词文件
+file:
+  synonym: /home/ug2017/files/synonym.txt
+# Elasticsearch配置
+es:
+  host: localhost
+  port: 9300
+# MongoDB配置
+mongo:
+  host: localhost
+  port: 27017

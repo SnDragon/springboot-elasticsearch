@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut.longerwu.graduation.dao.SchemassDao">
+
+    <resultMap id="schemassMap" type="com.scut.longerwu.graduation.models.Schemass" >
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="level" property="level" />
+        <result column="content" property="content" />
+        <result column="filename" property="fileName" />
+        <result column="number" property="number" />
+        <result column="last_level_name" property="lastLevelName" />
+    </resultMap>
+    <sql id="columnList">
+        id,title,level,content,last_level_name,filename,number
+    </sql>
+    <sql id="tableName">
+        clean_schemass
+    </sql>
+
+    <select id="findSchemassById" resultMap="schemassMap">
+      SELECT <include refid="columnList" /> from <include refid="tableName" />
+      WHERE id = #{id}
+    </select>
+
+    <select id="findSchemassByName" resultMap="schemassMap">
+        SELECT <include refid="columnList" /> from <include refid="tableName" />
+        where filename=#{name}
+    </select>
+
+</mapper>

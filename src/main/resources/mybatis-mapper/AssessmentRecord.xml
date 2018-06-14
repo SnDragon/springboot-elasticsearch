@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut.longerwu.graduation.dao.AssessmentRecordDao">
+
+    <resultMap id="assessmentRecordMap" type="com.scut.longerwu.graduation.models.AssessmentRecord" >
+        <id column="id" property="id" />
+        <result column="standard_id" property="standardId" />
+        <result column="result" property="result" />
+        <result column="staff_id" property="staffId" />
+        <result column="staff_name" property="staffName" />
+        <result column="assess_time" property="assessTime" />
+    </resultMap>
+
+    <insert id="add"
+            parameterType="com.scut.longerwu.graduation.models.AssessmentRecord"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        insert into assessment_record(standard_id,result,staff_id,staff_name,assess_time)
+        values(#{standardId},#{result},#{staffId},#{staffName},#{assessTime})
+    </insert>
+
+
+</mapper>

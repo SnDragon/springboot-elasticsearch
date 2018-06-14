@@ -1,0 +1,32 @@
+# 数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/standard?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+# Mybatis配置
+mybatis:
+  type-aliases-package: com.scut.longerwu.graduation.models
+  mapper-locations: classpath:mybatis-mapper/*.xml
+# 日志配置
+logging:
+  level:
+      com.scut.longerwu.graduation.dao: debug
+# 文件存放目录
+directory:
+  qiye: I:/桌面/LED/qiye/
+  country: I:/桌面/LED/广东标院-双层PDF/
+  qiyeTxt: I:/桌面/LED/qiyeTxt/
+# 同义词文件
+file:
+  synonym: I:/桌面/LED/synonym.txt
+
+# Elasticsearch配置
+es:
+  host: 116.56.140.85
+  port: 9300
+# MongoDB配置
+mongo:
+  host: 116.56.140.85
+  port: 27017

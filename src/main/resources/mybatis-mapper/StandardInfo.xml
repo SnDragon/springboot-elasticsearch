@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut.longerwu.graduation.dao.StandardInfoDao">
+
+    <resultMap id="standardInfoMap" type="com.scut.longerwu.graduation.models.StandardInfo" >
+        <id column="id" property="id" />
+        <result column="number" property="number" />
+        <result column="c_name" property="cName" />
+        <result column="e_name" property="eName" />
+        <result column="applicable_range" property="applicableRange" />
+        <result column="ccs" property="ccs" />
+        <result column="ics" property="ics" />
+        <result column="status" property="status" />
+        <result column="ref_standards" property="refStandards" />
+        <result column="carry_out_date" property="carryOutDate" />
+        <result column="publish_date" property="publishDate" />
+        <result column="abolish_date" property="abolishDate" />
+        <result column="scope" property="scope" />
+    </resultMap>
+    <sql id="tableName">
+        standard_info
+    </sql>
+    <sql id="columnList">
+        number,c_name,e_name,applicable_range,ccs,ics,status,ref_standards,carry_out_date,publish_date,abolish_date,scope
+    </sql>
+
+    <select id="getStandardInfoListByKeywords" resultMap="standardInfoMap">
+        SELECT <include refid="columnList" />
+        FROM <include refid="tableName" />
+        WHERE c_name like CONCAT('%',#{keywords},'%');
+    </select>
+    
+    <select id="getStandardInfoByNumber" resultMap="standardInfoMap">
+        SELECT <include refid="columnList" />
+        FROM <include refid="tableName" />
+        WHERE number =#{number}
+    </select>
+
+    <select id="getStandardInfoListByIcs" resultMap="standardInfoMap">
+        SELECT id,number,c_name,ics
+        FROM <include refid="tableName" />
+        where ics like CONCAT('%',#{ics},'%')
+    </select>
+
+    <select id="getStandardById" resultMap="standardInfoMap">
+        SELECT <include refid="columnList" />
+        FROM <include refid="tableName" />
+        WHERE id=#{id}
+    </select>
+
+    <select id="getStandardInfoList" resultMap="standardInfoMap">
+        SELECT <include refid="columnList" />
+        FROM <include refid="tableName" />
+    </select>
+
+</mapper>

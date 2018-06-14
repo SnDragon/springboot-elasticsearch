@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scut.longerwu.graduation.dao.QiyeStandardDao">
+
+    <resultMap id="standardMap" type="com.scut.longerwu.graduation.models.QiyeStandard">
+        <id column="id" property="id"/>
+        <result column="original_file_name" property="originalFileName"/>
+        <result column="file_name" property="fileName"/>
+        <result column="size" property="size"/>
+        <result column="upload_staff" property="uploadStaff"/>
+        <result column="upload_time" property="uploadTime"/>
+        <result column="status" property="status"/>
+        <result column="company" property="company"/>
+        <association property="assessment" javaType="com.scut.longerwu.graduation.models.AssessmentRecord">
+            <id property="id" column="assessment_id"/>
+            <result column="result" property="result"/>
+            <result column="staff_name" property="staffName"/>
+            <result column="assess_time" property="assessTime"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="com.scut.longerwu.graduation.models.QiyeStandard"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into qiye_standard(original_file_name,file_name,size,upload_staff,upload_time,company)
+        values(#{originalFileName},#{fileName},#{size},#{uploadStaff},#{uploadTime},#{company})
+    </insert>
+
+    <select id="getQiyeStandardById" resultMap="standardMap">
+      SELECT q.id,original_file_name,file_name,size,upload_staff,
+      upload_time,status,result,staff_name,assess_time,company
+      FROM qiye_standard q LEFT JOIN assessment_record a
+      ON q.id=a.standard_id
+      WHERE q.id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.scut.longerwu.graduation.models.QiyeStandard">
+        update qiye_standard
+        <set>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="getStandardList" resultMap="standardMap">
+      SELECT q.id,original_file_name,file_name,size,upload_staff,
+      upload_time,status,result,staff_name,assess_time,company
+      FROM qiye_standard q LEFT JOIN assessment_record a
+      ON q.id=a.standard_id
+      ORDER BY a.assess_time DESC,q.upload_time DESC
+    </select>
+
+    <update id="updateStandardStatus">
+        UPDATE qiye_standard
+        SET status=#{status}
+        WHERE id=#{id}
+    </update>
+</mapper>
